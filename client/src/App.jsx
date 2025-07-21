@@ -7,7 +7,7 @@ import Register from "./page/Register";
 import HomePage from "./page/HomePage";
 import UserRoutes from "./component/routes/Private";
 import AdminRoutes from "./component/routes/Admin";
-import Userdashboard from "./page/user/Userdashboard";
+import UserDashboard from "./page/user/UserDashboard";
 import YourOrder from "./page/YourOrder";
 import Dashboard from "./page/admin/Dashboard";
 import CreatePost from "./page/admin/CreatePost";
@@ -45,7 +45,7 @@ function App() {
 
         {/* {user routing} */}
         <Route path="/user" element={<UserRoutes />}>
-          <Route path="" element={<Userdashboard />} />
+          <Route path="" element={<UserDashboard />} />
           <Route path="your-order" element={<YourOrder />} />
         </Route>
 
