@@ -12,18 +12,22 @@ import { BookingProvider } from "./context/Booking.jsx";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
+const strtpePromise = loadStripe("");
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <BookingProvider>
-        <SearchProvider>
+        <Elements stripe={strtpePromise}>
           <CartProvider>
-            <AuthProvider>
-              <App />
-            </AuthProvider>
-            <ToastContainer />
+            <SearchProvider>
+              <AuthProvider>
+                <App />
+              </AuthProvider>
+              <ToastContainer />
+            </SearchProvider>
           </CartProvider>
-        </SearchProvider>
+        </Elements>
       </BookingProvider>
     </BrowserRouter>
   </StrictMode>

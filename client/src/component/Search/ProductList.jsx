@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const ProductList = ({ products }) => {
-  console.log(products);
+  // console.log(products);
   return (
     <div className="flex flex-col items-center w-[92%] relative bottom-7 ml-12">
       <h1 className="text-2xl font-bold mb-8 mt-9">

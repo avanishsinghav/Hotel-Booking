@@ -23,7 +23,6 @@ const Product = () => {
   const [cart, setcart] = usecart();
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const [auth] = useAuth();
-  console.log(postDetails);
 
   const handleCheckIn = () => {
     if (!auth?.token) {

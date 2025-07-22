@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 const Hotel = () => {
   const [post, setpost] = useState([]);
-  // console.log("All posts", post);
   const handleApi = async () => {
     try {
       const response = await axios.get(

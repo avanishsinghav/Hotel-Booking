@@ -10,8 +10,6 @@ const CartPage = () => {
   const [cart, setCart] = usecart();
   const navigate = useNavigate();
 
-  console.log("All Information about cart:", cart);
-
   const handleCheckIn = () => {
     if (!auth?.token) {
       toast.error("Authentication required to proceed!");
@@ -23,10 +21,6 @@ const CartPage = () => {
       return;
     }
 
-    // Log the total price and product details
-    console.log("Total Price:", totalPrice());
-
-    // Pass cart details to the payment page
     navigate("/payment", {
       state: {
         totalPrice: totalPrice(),
@@ -73,42 +67,39 @@ const CartPage = () => {
       <div className="w-full lg:w-2/3 bg-white p-6 rounded-lg">
         <h2 className="text-3xl font-bold mb-6 text-gray-800">Your Cart</h2>
         {cart.length > 0 ? (
-          cart.map((product) => {
-            console.log("Product Details:", product); // Log to ensure product details are present
-            return (
-              <div
-                key={product._id}
-                className="flex items-center gap-6 p-4 border-b border-gray-200 last:border-none"
+          cart.map((product) => (
+            <div
+              key={product._id}
+              className="flex items-center gap-6 p-4 border-b border-gray-200 last:border-none"
+            >
+              {/* Remove Button */}
+              <button
+                onClick={() => handleRemove(product._id)}
+                className="text-red-500 hover:text-red-700 transition"
               >
-                {/* Remove Button */}
-                <button
-                  onClick={() => handleRemove(product._id)}
-                  className="text-red-500 hover:text-red-700 transition"
-                >
-                  <FaTrashAlt size={20} />
-                </button>
-                {/* Product Image */}
-                <img
-                  src={product.images[0]}
-                  alt={product.title}
-                  className="w-28 h-28 object-cover rounded-lg"
-                />
-                {/* Product Info */}
-                <div className="flex flex-col">
-                  <h3 className="text-xl font-semibold text-gray-700">
-                    {product.title}
-                  </h3>
-                  <p className="text-sm text-gray-500">
-                    {product.description.substring(0, 50)}
-                  </p>
-                </div>
-                {/* Product Price */}
-                <div className="ml-auto text-lg font-semibold text-gray-800">
-                  ${product.price}
-                </div>
+                <FaTrashAlt size={20} />
+              </button>
+              {/* Product Image */}
+              <img
+                src={product.images[0]}
+                alt={product.title}
+                className="w-28 h-28 object-cover rounded-lg"
+              />
+              {/* Product Info */}
+              <div className="flex flex-col">
+                <h3 className="text-xl font-semibold text-gray-700">
+                  {product.title}
+                </h3>
+                <p className="text-sm text-gray-500">
+                  {product.description.substring(0, 50)}
+                </p>
               </div>
-            );
-          })
+              {/* Product Price */}
+              <div className="ml-auto text-lg font-semibold text-gray-800">
+                ${product.price}
+              </div>
+            </div>
+          ))
         ) : (
           <p className="text-gray-500 text-center mt-6">Your cart is empty.</p>
         )}

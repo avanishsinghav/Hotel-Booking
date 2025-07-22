@@ -12,7 +12,6 @@ import { useNavigate, useParams } from "react-router-dom";
 const RelatedPost = ({ relatedProducts }) => {
   const navigate = useNavigate();
   const { slug } = useParams();
-  console.log(relatedProducts);
   return (
     <div className="flex flex-wrap gap-6 p-6 ml-12">
       {/* Coupon Card */}

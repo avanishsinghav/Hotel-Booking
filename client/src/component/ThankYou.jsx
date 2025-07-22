@@ -8,7 +8,7 @@ const ThankYou = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setTimeout(() => setShowMessage(true), 500); // Trigger the message after a delay
+    setTimeout(() => setShowMessage(true), 500);
   }, []);
 
   return (

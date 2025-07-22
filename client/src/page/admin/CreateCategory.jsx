@@ -6,7 +6,6 @@ const CreateCategory = () => {
   const [categoryName, setCategoryName] = useState("");
   const [categories, setCategories] = useState([]);
   const [editId, setEditId] = useState(null);
-  console.log(categories);
 
   // Fetch categories from the backend
   const fetchCategories = async () => {

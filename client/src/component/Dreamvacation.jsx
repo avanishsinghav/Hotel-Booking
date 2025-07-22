@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 const DreamVacation = () => {
   const [category, setCategory] = useState([]);
   const navigation = useNavigate();
-  console.log("Category", category);
 
   const getAllCategory = async () => {
     try {
