@@ -8,7 +8,6 @@ const Hotels = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch hotel data
   const handleApi = async () => {
     try {
       const response = await axios.get(
@@ -23,12 +22,10 @@ const Hotels = () => {
     }
   };
 
-  // Fetch on load
   useEffect(() => {
     handleApi();
   }, []);
 
-  // Rotate hotel images every 4 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setImageIndexes((prevIndexes) => {
@@ -47,10 +44,12 @@ const Hotels = () => {
   }, [post]);
 
   return (
-    <div className="container mx-auto px-4 mt-16">
-      <h2 className="text-3xl font-semibold mb-8 text-center">
-        Popular Hotels
-      </h2>
+    <div className="container mx-auto px-4 mt-6">
+      <div className="w-full flex justify-center">
+        <h2 className="text-4xl font-bold text-gray-900 tracking-wide inline-block px-6 py-2 rounded-md">
+          Discover Your Dream Stay ✨
+        </h2>
+      </div>
 
       {loading && (
         <p className="text-center text-gray-500">Loading hotels...</p>
@@ -87,21 +86,9 @@ const Hotels = () => {
               <span className="font-medium">Location:</span>{" "}
               {hotel.hotelLocation || "Unknown"}
             </p>
-            <p className="text-sm text-gray-700">
+            <p className="text-sm text-gray-700 mb-1">
               <span className="font-medium">Price:</span> ₹{hotel.price}
             </p>
-            {hotel.facilities?.length > 0 && (
-              <div className="flex flex-wrap gap-2 mt-2">
-                {hotel.facilities.map((f, idx) => (
-                  <span
-                    key={idx}
-                    className="bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded"
-                  >
-                    {f}
-                  </span>
-                ))}
-              </div>
-            )}
           </Link>
         ))}
       </div>

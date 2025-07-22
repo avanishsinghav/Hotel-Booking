@@ -58,12 +58,16 @@ const Navbar = () => {
           {auth.user?.role === "admin" ? "Add Hotel" : "Booking"}
         </a>
         <a
-          href={auth.user?.role === "admin" ? "/admin/create-category" : "/"}
+          href={
+            auth.user?.role === "admin"
+              ? "/admin/create-category"
+              : "/user/category"
+          }
           className="text-gray-600 hover:text-gray-900"
         >
           {auth.user?.role === "admin" ? "Add Category" : "Category"}
         </a>
-        <a href="/" className="text-gray-600 hover:text-gray-900">
+        <a href="/about" className="text-gray-600 hover:text-gray-900">
           About
         </a>
       </div>
@@ -71,7 +75,9 @@ const Navbar = () => {
       {/*  notofication and profile*/}
 
       <div className="flex items-center mr-[9rem] relative cursor-pointer gap-4">
-        <FaHeart size={23} onClick={() => navigate("/cart")} />
+        {auth.user?.role !== "admin" && (
+          <FaHeart size={23} onClick={() => navigate("/cart")} />
+        )}
         <FaUser size={20} onClick={handleDropdownToggle} />
         {isDropDownOpen && (
           <div

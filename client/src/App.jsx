@@ -24,6 +24,8 @@ import Hotels from "./component/Hotels";
 import Payment from "./page/Payment";
 import ThankYou from "./component/ThankYou";
 import SelectedCategory from "./page/SelectedCategory";
+import UserCategory from "./page/user/UserCategory";
+import About from "./page/About";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -42,11 +44,13 @@ function App() {
         <Route path="/payment" element={<Payment />} />
         <Route path="/thank-you" element={<ThankYou />} />
         <Route path="/category/:slug" element={<SelectedCategory />} />
+        <Route path="/about" element={<About />} />
 
         {/* {user routing} */}
         <Route path="/user" element={<UserRoutes />}>
           <Route path="" element={<UserDashboard />} />
           <Route path="your-order" element={<YourOrder />} />
+          <Route path="category" element={<UserCategory />} />
         </Route>
 
         {/* {Admiin routing} */}
