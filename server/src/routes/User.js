@@ -1,5 +1,9 @@
 import express from "express";
-import { loginController, registerController } from "../controller/User.js";
+import {
+  getuserController,
+  loginController,
+  registerController,
+} from "../controller/User.js";
 import { isAdmin, requireSignIn } from "../middleware/Auth.js";
 
 const app = express.Router();
@@ -11,5 +15,6 @@ app.get("/user-auth", requireSignIn, (req, res) => {
 app.get("/is-admin", requireSignIn, isAdmin, (req, res) => {
   res.status(200).send({ ok: true });
 });
+app.get("/user-profile", requireSignIn, getuserController);
 
 export default app;

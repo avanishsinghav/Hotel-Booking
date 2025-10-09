@@ -16,7 +16,7 @@ export const registerController = async (req, res) => {
 
     const existingUser = await userModel.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ error: "User already exists" });
+      return res.status(409).json({ error: "User already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -30,7 +30,7 @@ export const registerController = async (req, res) => {
 
     await newUser.save();
 
-    return res.status(200).send({
+    return res.status(201).send({
       success: true,
       message: "User registered successfully",
     });
@@ -54,14 +54,14 @@ export const loginController = async (req, res) => {
 
     const user = await userModel.findOne({ email });
     if (!user) {
-      return res.status(400).json({
+      return res.status(401).json({
         error: "Invalid user details",
       });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({
+      return res.status(401).json({
         error: "Invalid Password",
       });
     }
@@ -85,6 +85,28 @@ export const loginController = async (req, res) => {
     return res.status(500).send({
       success: false,
       message: "Problem in login API",
+    });
+  }
+};
+export const getuserController = async (req, res) => {
+  try {
+    console.log(req.user.id);
+    const user = await userModel.findById(req.user?.id).select("-password");
+    if (!user) {
+      return res.status(404).send({
+        success: false,
+        message: "User not found",
+      });
+    }
+    res.status(200).send({
+      success: true,
+      user,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({
+      success: false,
+      message: "Error fetching user profile",
     });
   }
 };

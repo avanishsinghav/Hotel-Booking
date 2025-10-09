@@ -289,7 +289,7 @@ export const postFiltersController = async (req, res) => {
     });
   } catch (error) {
     console.error("Error while filtering products:", error);
-    res.status(400).send({
+    res.status(500).send({
       success: false,
       message: "Error while filtering products",
       error,

@@ -14,7 +14,7 @@ export const createCateoryController = async (req, res) => {
 
     const existingCategory = await CategoryModel.findOne({ name });
     if (existingCategory) {
-      return res.status(400).json({
+      return res.status(409).json({
         message: "Category already exists",
       });
     }
@@ -22,7 +22,7 @@ export const createCateoryController = async (req, res) => {
       name,
       slug: slug(name),
     }).save();
-    return res.status(200).send({
+    return res.status(201).send({
       sucess: true,
       message: "Category has been created",
       newcategory,
@@ -106,10 +106,10 @@ export const singleCategory = async (req, res) => {
       post,
     });
   } catch (error) {
-    return res.status(400).send({
+    return res.status(500).send({
       success: false,
       message: "Error while updating cateegory",
-      err,
+      error,
     });
   }
 };

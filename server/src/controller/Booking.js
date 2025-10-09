@@ -4,8 +4,6 @@ import mongoose from "mongoose";
 import Post from "../models/Post.js";
 import jwt from "jsonwebtoken";
 import UserModel from "../models/User.js";
-// import BookingModel from "../models/Booking.js";
-
 const stripe = "";
 
 export const createPaymentIntent = async (req, res) => {
@@ -71,7 +69,7 @@ export const updatePatmentAvailability = async (req, res) => {
     if (!post) {
       return res.status(404).json({ error: "Post not found" });
     }
-    res.json({ sucess: true, post });
+    res.status(200).json({ success: true, post });
   } catch (err) {
     console.log(err);
     return res.status(500).json({
@@ -97,7 +95,7 @@ export const createBookings = async (req, res) => {
     try {
       decode = jwt.verify(token, process.env.JWT_SECRET);
     } catch (error) {
-      return res.status(400).json({
+      return res.status(401).json({
         success: false,
         message: "Invalid or expire token",
       });
@@ -108,7 +106,7 @@ export const createBookings = async (req, res) => {
     const userId = decode.id;
     const userExists = await UserModel.findById(userId);
     if (!userExists) {
-      return res.status(400).send({
+      return res.status(404).send({
         success: false,
         message: "user not found",
       });
@@ -118,7 +116,7 @@ export const createBookings = async (req, res) => {
 
     const post = await Post.findById(postId);
     if (!post) {
-      return res.status(400).send({
+      return res.status(404).send({
         success: false,
         message: "Post not found",
       });
@@ -134,7 +132,7 @@ export const createBookings = async (req, res) => {
     });
 
     const savedBooking = await booking.save();
-    return res.status(200).send({
+    return res.status(201).send({
       success: true,
       message: "booking create successfully",
       booking: savedBooking,
